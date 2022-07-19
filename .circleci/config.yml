@@ -91,6 +91,7 @@ jobs:
           keys: [frontend-build]
       - run:
           name: Run frontend test
+          working_directory: ./frontend
           command: |
             cd frontend
             npm install
