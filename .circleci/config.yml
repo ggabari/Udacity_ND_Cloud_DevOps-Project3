@@ -103,12 +103,10 @@ jobs:
         - restore_cache:
             keys: [frontend-scan]
         - run:
-            name: frontend scan
+            name: frontend analyze
             command: |
               cd frontend
               npm install
-              npm audit fix --audit-level=critical
-            # npm install oauth-sign@^0.9.0
               npm audit --audit-level=critical
 
   scan-backend:
@@ -119,12 +117,10 @@ jobs:
         - restore_cache:
             keys: [backend-scan]
         - run:
-            name: backend scan
+            name: backend analyze
             command: |
               cd backend
               npm install
-              npm audit fix --audit-level=critical
-            # npm install oauth-sign@^0.9.0
               npm audit --audit-level=critical
 
 
