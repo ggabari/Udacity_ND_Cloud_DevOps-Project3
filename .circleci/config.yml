@@ -10,10 +10,8 @@ commands:
       workflow_id:
         type: string
         default: "${CIRCLE_WORKFLOW_ID}"
-​
-
-    steps:
-      - run:
+​    steps:
+      - run: 
           name: Destroy environments
           when: on_fail
           command: |
@@ -23,7 +21,6 @@ commands:
           when: on_fail
           command: |
             aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}
-
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
@@ -41,8 +38,7 @@ commands:
             #  npm install
             #  Add revert code here. You can find this in the Getting Started section.
               exit 1
-            fi
-            
+            fi         
 jobs:
   build-frontend:
     docker:
