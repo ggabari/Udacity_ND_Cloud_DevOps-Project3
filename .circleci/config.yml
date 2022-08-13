@@ -184,14 +184,13 @@ jobs:
           fingerprints:
            - 'ed:eb:12:df:32:63:81:d5:11:61:66:55:f5:8f:c4:b1:7d:05:00:8e'
       # attach workspace
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install dependencies
           command: |
             # Your code here
             apk add --update --no-cache tar gzip ansible awscli
-     
+      - attach_workspace:
+          at: ~/
       - run:
           name: Configure server
           command: |
