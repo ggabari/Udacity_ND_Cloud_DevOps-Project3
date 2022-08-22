@@ -182,13 +182,13 @@ jobs:
       # Add ssh keys with fingerprint
       - add_ssh_keys:
           fingerprints:
-            - "c0:6d:0e:bc:a6:b6:b6:a7:2c:c2:55:ca:0f:70:cf:4d:d9:b1:4a:f9"
+            ["cb:5d:ea:d9:52:44:c2:9d:74:39:4c:a6:96:47:05:d9"]
       # attach workspace
       - run:
           name: Install dependencies
           command: |
             # Your code here
-            apk add --update --no-cache tar gzip ansible aws-cli curl
+            apk add --update --no-cache tar gzip nodejs npm aws-cli curl
       - attach_workspace:
           at: ~/
       - run:
