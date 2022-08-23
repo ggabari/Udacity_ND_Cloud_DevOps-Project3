@@ -175,7 +175,7 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-      - image: python:3.7-alpine3.11
+      - image: python:3.7.13-alpine3.16
     steps:
       # Checkout code from git
       - checkout
@@ -186,13 +186,15 @@ jobs:
       # attach workspace
       - run:
           name: Install dependencies
-          command: | 
-            apk add --update --no-cache -y tar gzip ansible python3
+          command: |
+            # Your code here
+            apk add --update --no-cache tar gzip nodejs npm aws-cli curl
       - attach_workspace:
           at: ~/
       - run:
           name: Configure server
           command: |
+            # Your code here
             cd .circleci/ansible
             ansible-playbook -i inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure
