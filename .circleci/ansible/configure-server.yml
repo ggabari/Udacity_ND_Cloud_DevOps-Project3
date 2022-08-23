@@ -18,9 +18,8 @@
       wait_for_connection:
         timeout: 600
     - name: "install python for Ansible"
-      become: ture
-      raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
-      changed_when: false
+      become: True
+      
       # Your code here
       apt:
           name: python3
