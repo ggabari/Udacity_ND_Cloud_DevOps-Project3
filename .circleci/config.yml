@@ -188,13 +188,12 @@ jobs:
           name: Install dependencies
           command: |
             
-            apk add --update --no-cache tar aws-cli curl
+            apk aws-cli ansible curl
       - attach_workspace:
           at: ~/
       - run:
           name: Configure server
           command: |
-            
             cd .circleci/ansible
             ansible-playbook -i inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure
