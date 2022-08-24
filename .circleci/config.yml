@@ -3,11 +3,22 @@ version: 2.1
 orbs: 
   slack: circleci/slack@4.10.1
 commands:
+  Install_ansible:
+    description: Install Ansible
+    steps:
+      - run:
+          name: Install Ansible
+          command: |
+            sudo apt update
+            sudo apt install software-properties-common y
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible -y
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
       # Add parameter here
       workflow_id:
+        default: "${CIRCLE_WORKFLOW_ID:0:5}"
         type: string
          
     steps:
@@ -175,7 +186,7 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-      - image: python:3.7-alpine3.11
+      - image: cimg/base:stable
     steps:
       # Checkout code from git
       - checkout
@@ -185,16 +196,14 @@ jobs:
       # attach workspace
       - attach_workspace:
           at: ~/
-      - run:
-          name: Install dependencies
-          command: |
-            
-            apk add --update ansible
-      
+      - install_ansible
+         
       - run:
           name: Configure server
           command: |
             cd .circleci/ansible
+            cat inventory.txt
+
             ansible-playbook -i inventory.txt configure-server.yml
       # Here's where you will add some code to rollback on failure
       - destroy-environment:
