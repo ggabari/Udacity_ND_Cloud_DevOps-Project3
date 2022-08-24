@@ -3,16 +3,16 @@ version: 2.1
 orbs: 
   slack: circleci/slack@4.10.1
 commands:
-  Install_ansible:
+  install-ansible:
     description: Install Ansible
     steps:
       - run:
           name: Install Ansible
           command: |
-            sudo apt update
-            sudo apt install software-properties-common -y
-            sudo add-apt-repository --yes --update ppa:ansible/ansible
-            sudo apt install ansible -y
+              sudo apt update
+              sudo apt install software-properties-common -y
+              sudo add-apt-repository --yes --update ppa:ansible/ansible
+              sudo apt install ansible -y
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -27,12 +27,12 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:5}
+              aws cloudformation delete-stack --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:5}
       - run:
           name: Destroy environments
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:5}
+              aws cloudformation delete-stack --stack-name udapeople-backend-${CIRCLE_WORKFLOW_ID:0:5}
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
     parameters:
@@ -198,7 +198,7 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - Install_ansible
+      - install-ansible
          
       - run:
           name: Configure server
