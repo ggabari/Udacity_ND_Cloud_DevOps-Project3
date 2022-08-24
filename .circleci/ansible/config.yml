@@ -4,7 +4,7 @@ orbs:
   slack: circleci/slack@4.10.1
 commands:
   install_ansible:
-    description: Install Ansible
+    description: Install Ansible-hmm
     steps:
       - run:
           name: Install Ansible
