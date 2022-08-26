@@ -234,12 +234,12 @@ jobs:
             npm run migrations >> migrations.txt
                       
       - run:
-          name: Send migration results to memstash
+          name: Send migration results to kvdb
           command: |
             if grep -q "success" ~/project/backend/migrations_dump.txt
             then
               curl --insecure https://kvdb.io/FDSuXbCC5V1Z9NDKMLC6N/migration_${CIRCLE_WORKFLOW_ID:0:5} -d '1'
-              fi
+            fi
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:5}   
      # Here's where you will add some code to rollback on failure      
