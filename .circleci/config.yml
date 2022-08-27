@@ -211,7 +211,7 @@ jobs:
           fingerprints: 
             - "11:5e:12:37:2a:ac:10:81:53:33:07:ca:83:2a:0b:37"
        # attach workspace     
-       - attach_workspace:
+      - attach_workspace:
           at: ~/
       - install-ansible
 
