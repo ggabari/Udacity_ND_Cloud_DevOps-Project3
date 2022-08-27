@@ -12,7 +12,7 @@ commands:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
-            
+
   install-ansible:
     description: Install Ansible-hmm
     steps:
@@ -202,7 +202,7 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-      - image: python:3.7-alphine3.11
+      - image: python:3.7-alpine3.11
     steps:
       # Checkout code from git
       - checkout
@@ -236,7 +236,7 @@ jobs:
   run-migrations:
     docker:
       # Docker image here that supports NodeJS
-      - image: python:3.7-alphine3.11
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - run:
