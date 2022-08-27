@@ -14,7 +14,7 @@ commands:
             sudo ./aws/install
 
   install-ansible:
-    description: Install Ansible-hmm
+    description: Install Ansible
     steps:
       - run:
           name: Install Ansible
@@ -213,6 +213,7 @@ jobs:
        # attach workspace     
       - attach_workspace:
           at: ~/
+
       - install-ansible
 
       - run:
