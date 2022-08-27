@@ -41,16 +41,17 @@ commands:
       - run:
           name: Revert migrations
           # Add when this will run
+          when: on_fail
           command: |
-            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
+               Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
             SUCCESS = 1
             if(( $SUCCESS==1 )); 
             then
-            #  cd ~/project/backend
-            #  npm install
-            #  Add revert code here. You can find this in the Getting Started section.
-              exit 1
-            fi         
+              cd ~/project/backend
+              npm install
+              npm run migration:revert
+            fi
+            
 jobs:
   build-frontend:
     docker:
@@ -187,7 +188,7 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-      - image: cimg/base:stable
+      - image: python:3.7-alphine3.11
     steps:
       # Checkout code from git
       - checkout
@@ -195,6 +196,12 @@ jobs:
       - add_ssh_keys:
           fingerprints: 
             - "11:5e:12:37:2a:ac:10:81:53:33:07:ca:83:2a:0b:37"
+
+      - run:
+          name: Install Dependencies
+          command: | 
+            apk add -update --no-cache tar gzip ansible aws-cli
+            
       # attach workspace
       - attach_workspace:
           at: ~/
