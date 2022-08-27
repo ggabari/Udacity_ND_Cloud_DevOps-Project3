@@ -214,13 +214,12 @@ jobs:
       - attach_workspace:
           at: ~/
 
-      - install-ansible
-
       - run:
           name: Install Dependencies
           command: | 
             apk add --update --no-cache tar gzip ansible aws-cli
-        
+            
+      - install-ansible
       - run:
           name: Configure server
           command: |
