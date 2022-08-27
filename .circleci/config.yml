@@ -39,7 +39,7 @@ commands:
     parameters:
       workflow_id:
         default: "${CIRCLE_WORKFLOW_ID:0:5}"
-        type: string
+        
       # Add parameter here     
     steps:
       - run:
